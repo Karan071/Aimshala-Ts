@@ -6,7 +6,7 @@ const KycForm1 = () => {
   const navigate = useNavigate();
   const [selectedOption, setSelectedOption] = useState("individual");
 
-  const handleOptionChange = (option) => {
+  const handleOptionChange = (option: string) => {
     setSelectedOption(option);
   };
 

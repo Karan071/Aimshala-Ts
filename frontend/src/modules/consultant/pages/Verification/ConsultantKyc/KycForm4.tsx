@@ -13,12 +13,12 @@ const KycForm4 = () => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Form data:", formData);
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e:any) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 

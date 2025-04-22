@@ -7,7 +7,7 @@ const KycForm2 = () => {
   const [aadhaarNumber, setAadhaarNumber] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Generating OTP for:", aadhaarNumber);
   };
@@ -44,7 +44,7 @@ const KycForm2 = () => {
                   onChange={(e) => setAadhaarNumber(e.target.value)}
                   placeholder="Enter Aadhaar number"
                   className="w-full py-[14.5px] px-[16px] border text-[#898989] border-[#DCDCDC] rounded-[8px] focus:outline-none focus:ring-2 focus:ring-[#94278F]/20 font-poppins h-[57px]"
-                  maxLength="12"
+                  maxLength={12}
                   pattern="\d{12}"
                   required
                 />

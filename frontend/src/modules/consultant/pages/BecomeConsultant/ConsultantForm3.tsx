@@ -1,10 +1,9 @@
-import { MapPin } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 
 const ConsultantForm3 = () => {
   const navigate = useNavigate();
   
-  const handleSubmit = (e) => {
+  const handleSubmit = (e:any) => {
     e.preventDefault();
     // Add your form submission logic here
   };

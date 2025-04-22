@@ -30,10 +30,10 @@ const ConsultantForm1 = () => {
         },
     ];
 
-    const [selected, setSelected] = useState([]);
+    const [selected, setSelected] = useState<number[]>([]);
 
-    const toggleSelection = (index) => {
-        setSelected((prevSelected) =>
+    const toggleSelection = (index: number) => {
+        setSelected((prevSelected: number[]) =>
             prevSelected.includes(index)
                 ? prevSelected.filter((i) => i !== index)
                 : [...prevSelected, index]

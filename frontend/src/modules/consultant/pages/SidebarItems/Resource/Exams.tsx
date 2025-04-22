@@ -28,7 +28,7 @@ function ExamCard() {
                     <img src={examIcon} alt="icon" />
                     <p className="font-semibold text-[20px]">UPSC Civil Services Examination (IAS, IPS, IFS)</p>
                 </div>
-                <LikeButton onToggle={(isLiked) => console.log("liked")}/>
+                <LikeButton onToggle={() => console.log("liked")}/>
             </div>
             <div className="mt-2">
                 <h1 className="flex justify-between ">

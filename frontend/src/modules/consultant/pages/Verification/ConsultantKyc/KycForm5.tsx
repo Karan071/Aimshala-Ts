@@ -5,30 +5,40 @@ import Kyc2 from '@/assets/Consultant/ConsultantEkyc/Kyc3.png'
 import profileImaage from "@/assets/Consultant/BecomeConsultant/image1.png";
 
 const KycForm5 = () => {
-  const [profileImage, setProfileImage] = useState(null);
+  const [profileImage, setProfileImage] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  const handleImageChange = (e) => {
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = (event) => setProfileImage(event.target.result);
+      reader.onload = (event) => {
+        if (event.target?.result) {
+          setProfileImage(event.target.result as string);
+        }
+      };
       reader.readAsDataURL(file);
     }
   };
 
-  const [formData, setFormData] = useState({
+  interface FormData {
+    fullName: string;
+    gender: string;
+    dob: string;
+  }
+
+  const [formData, setFormData] = useState<FormData>({
     fullName: "",
     gender: "",
     dob: "",
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Form data:", formData);
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
