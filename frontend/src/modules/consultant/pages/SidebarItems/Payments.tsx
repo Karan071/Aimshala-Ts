@@ -73,6 +73,7 @@ export default function Payments() {
                 <Card className="flex-1">
                     <CardContent className="overflow-x-auto ">
                         <Table>
+                            <TableCaption>Recent Transactions for Aimshala</TableCaption>
                             <TableHeader className="">
                                 <TableRow className=" rounded-sm">
                                     <TableHead className="bg-[#94278F]/30 rounded-tl-sm">Sr No.</TableHead>
