@@ -38,7 +38,7 @@ function App() {
           <Route path='/consultant/reviews' element={<Reviews />} />
           <Route path='/consultant/refer' element={<ReferEarn />} />
           <Route path='/consultant/business-profile' element={<BusinessProfile />} />
-          <Route path='/consultant/profile' element={<Profile />} />
+          <Route path="/consultant/profile/*" element={<Profile />} />
         </Routes>
       </Layout>
     </Router>

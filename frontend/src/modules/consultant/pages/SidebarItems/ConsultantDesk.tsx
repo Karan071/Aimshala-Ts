@@ -5,10 +5,12 @@ import SessionRequestCard from "../../components/SessionRequestCard"
 import profile from "@/assets/Profile-1.png";
 import NotificationCard from "../../components/NotificationCard"
 
+
+
 export default function ConsultDesk() {
     return <section className="mt-20 font-poppins flex gap-6 ">
         {/* left side */}
-        <div className="flex-1 flex flex-col gap-4">
+        <div className="flex-1 flex flex-col gap-4 w-[1020px] flex-shrink-0">
             <div className="flex flex-col gap-4">
                 <div className="border border-gray-400 rounded-2xl p-4 flex gap-4 bg-white">
                     <div className="h-[70px] w-[70px] inline-flex items-center justify-center text-5xl">👋</div>
@@ -31,7 +33,7 @@ export default function ConsultDesk() {
                     <h1 className="text-[20px] font-semibold mt-4">Appointments</h1>
 
                     {/* Appointment card */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-6">
                         <AppointmentCard />
                         <AppointmentCard />
                         <AppointmentCard />
@@ -67,7 +69,7 @@ export default function ConsultDesk() {
             </div>
         </div>
         {/* right */}
-        <div className="w-[350px]">
+        <div className="w-[390px]">
             <div className="flex flex-col gap-6">
                 {/* Profile card */}
                 <div className="flex border border-gray-400 bg-white rounded-xl p-3 gap-5">
@@ -111,6 +113,7 @@ export default function ConsultDesk() {
                 </div>
             </div>
         </div>
+
     </section>
 }
 

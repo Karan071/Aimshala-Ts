@@ -1,4 +1,3 @@
-import { Separator } from "@/components/ui/separator";
 import { ResourceCard } from "@/modules/consultant/components/ResourceCard";
 const cardData = [
     {
@@ -42,17 +41,13 @@ const cardData = [
 export default function MyResources() {
     return (
         <section >
-            <div className="flex items-center gap-2 w-full ">
-                <h2 className="text-[24px] whitespace-nowrap">My Resources</h2>
-                <Separator className="bg-[#FFCB07] flex-1" />
-            </div>
             <div className="py-4">
                 <div className="">
                     <span className="border-2 p-2 rounded-l-xl">Active</span>
                     <span className="border-2 p-2 rounded-r-xl">Deactivated</span>
                 </div>
             </div>
-            <div className="flex justify-center items-center flex-col gap-2 rounded-2xl">
+            <div className="flex justify-center items-center flex-col gap-2 rounded-2xl m-2 ">
                 {cardData.map((card, index) => (
                     <ResourceCard key={index} {...card} />
                 ))}

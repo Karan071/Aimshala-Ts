@@ -46,7 +46,7 @@ export default function Payments() {
     });
 
     return (
-        <section className="p-6 space-y-8 font-poppins border mt-20 rounded-2xl">
+        <section className="p-6 space-y-8 font-poppins border mt-20 rounded-2xl bg-white">
             {/* Title */}
             <div className="flex items-center gap-2 w-full ">
                 <h2 className="text-[24px] whitespace-nowrap">Payments</h2>

@@ -8,7 +8,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     const { pathname } = useLocation();
     const hideSidebar = pathname === "/"
     return (
-        <div className="flex flex-col min-h-screen bg-gradient-to-b from-white to-[#F0F8F8]">
+        <div className="flex flex-col min-h-screen bg-gradient-to-b from-[#FFF5FF] to-[#F0F8F8]">
             <nav className="flex-shrink-0">
                 <Navbar />
             </nav>

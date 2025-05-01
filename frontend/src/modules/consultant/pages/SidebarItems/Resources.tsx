@@ -192,22 +192,22 @@ export default function Resources() {
     const activeTabComponent = primaryTabs.find(tab => tab.item === activePrimaryTab)?.component;
 
     return (
-        <div className="px-6 sm:px-8 mx-auto font-poppins border rounded-2xl mt-20">
+        <div className="px-6 sm:px-8 mx-auto font-poppins border rounded-2xl mt-20 bg-white">
             <div className="w-full min-h-[120px] p-6 mb-6 bg-white ">
                 <h2 className="text-3xl sm:text-4xl font-semibold text-gray-900 mb-2">Resources</h2>
                 <p className="text-xl text-gray-600">Help with educational planning.</p>
             </div>
 
             {/* Primary Tabs */}
-            <div className="max-w-[1360px] h-[53px] inline-flex bg-white border border-gray-300 rounded-xl shadow-sm mb-8">
+            <div className="max-w-[1360px] h-[53px] inline-flex bg-white border border-gray-300 rounded-xl shadow-sm mb-6">
                 {primaryTabs.map((tab, index) => (
                     <button key={index} onClick={() => {
                             console.log("Setting tab to:", tab.item);
                             setActivePrimaryTab(tab.item);
                             setActiveSecondaryTab("Career Cluster");
                         }}
-                        className={`px-6 h-full flex items-center text-xl transition-colors duration-200 ${activePrimaryTab === tab.item
-                            ? "text-[#94278F] font-medium pb-1 border-b-2 border-[#94278F]"
+                        className={`px-8 h-full flex items-center text-xl transition-colors duration-200 rounded-[inherit] ${activePrimaryTab === tab.item
+                            ? "text-[#94278F] font-medium bg-[#94278F]/20"
                             : "text-gray-500 hover:text-gray-700"
                             }`}
                     >
@@ -217,9 +217,9 @@ export default function Resources() {
             </div>
 
               {/* Section Title */}
-                <div className="flex items-center mb-10">
+                <div className="flex items-center mb-6">
                 <h3 className="text-2xl font-semibold text-gray-800">{activePrimaryTab}</h3>
-                {activePrimaryTab === "Career Library" && <div className="flex-grow ml-4 h-0.5 bg-yellow-400" />}
+                <div className="flex-grow ml-4 h-0.5 bg-yellow-400" />
             </div>
 
             {/* Secondary Tabs */}
@@ -388,7 +388,7 @@ export default function Resources() {
                 </>
             ) : (
                 <div>
-                    {activeTabComponent || `Content for <strong>${activePrimaryTab}</strong> will go here.`}
+                    {activeTabComponent}
                 </div>
             )}
         </div >

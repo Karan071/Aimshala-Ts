@@ -1,9 +1,17 @@
-import { Clock4, EllipsisVertical, FileText, MessageCircleMore, Pencil, Plus, Video } from "lucide-react";
+import { Clock4, EllipsisVertical, FileText, MessageCircleMore, Pencil, Plus, Video, X } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import ActiveTag from "../../components/ActiveTag";
 import DeactiveTag from "../../components/DeactivateTag";
+import { useState } from 'react';
+import activate from "@/assets/Icons/activate.svg";
+import deactivate from "@/assets/Icons/deactivate.svg"
+import { Doubts } from "../Popups/Expertise/Doubts";
+
 
 export default function Expertise() {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isEditOpen, setIsEditOpen] = useState(false);
+
     return (
         <section className="flex flex-col border rounded-2xl font-poppins p-8 mt-20 bg-white">
             <div className="space-y-8">
@@ -12,7 +20,7 @@ export default function Expertise() {
                         <h1 className="px-4 py-1 text-sm border border-[#898989] rounded-l-3xl text-[16px]">Consulting</h1>
                         <h1 className="px-4 py-1 text-sm border rounded-r-3xl border-[#898989] text-[16px]">Mentorship</h1>
                     </div>
-                    <button className="bg-[var(--color-purple)] text-white rounded-[6px] px-6 py-2.5 text-[16px]">
+                    <button className="bg-[var(--color-purple)] text-white rounded-[6px] px-6 py-2.5 text-[16px] ">
                         Add Expertise
                     </button>
                 </div>
@@ -31,8 +39,40 @@ export default function Expertise() {
                             <ActiveTag />
                         </div>
                         <div className="flex items-center gap-3">
-                            <EllipsisVertical className="text-[var(--color-purple)]" />
-                            <Pencil className="text-[var(--color-purple)]" />
+                            <div className="relative">
+                                <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                                    <EllipsisVertical className="text-[var(--color-purple)]" />
+                                </button>
+                                {isMenuOpen && (
+                                    <div className="absolute right-7 -top-1 mt-2 w-48 rounded-md shadow-lg bg-white">
+                                        <ul className="py-1 ">
+                                            {[
+                                                { icon: <Pencil />, label: 'Edit', action: () => { setIsEditOpen(true) } },
+                                                { icon: <img src={activate} alt="activate" className="w-6 h-6" />, label: <span className="text-blue-500">Activate</span>, action: () => { /* handle activate */ } },
+                                                { icon: <img src={deactivate} alt="activate" className="w-6 h-6" />, label: <span className="text-red-500"> Deactivate</span>, action: () => { /* handle deactivate */ } }
+                                            ].map((item, index) => (
+                                                <li key={index}>
+                                                    <button
+                                                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+                                                        onClick={() => {
+                                                            item.action();
+                                                            setIsMenuOpen(false);
+                                                        }}
+                                                    >
+                                                        <div className="flex items-center gap-3">
+                                                            <span className="">{item.icon}</span>
+                                                            <span>{item.label}</span>
+                                                        </div>
+                                                    </button>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                )}
+                            </div>
+                            <button>
+                                <Pencil className="text-[var(--color-purple)]" />
+                            </button>
                         </div>
                     </div>
                     <div className="border-t p-4 flex items-center gap-5">
@@ -91,7 +131,7 @@ export default function Expertise() {
                         <div className="flex items-center gap-3">
                             <h1 className="text-[32px] font-bold">Academic Consultant</h1>
                             <ActiveTag />
-                            <DeactiveTag/>
+                            <DeactiveTag />
                         </div>
                         <Plus className="text-[var(--color-purple)]" />
                     </div>
@@ -168,7 +208,16 @@ export default function Expertise() {
                     </div>
                 </div>
             </div>
+
+            {isEditOpen && (
+                <div className="fixed top-0 left-0 w-full h-full bg-black/70 z-50 flex items-center justify-center p-4 overflow-y-auto ">
+                    <div className="w-full max-w-[790px] bg-white rounded-lg shadow-lg relative max-h-[100vh]">
+                        <Doubts onClose={() => setIsEditOpen(false)} />
+                    </div>
+                </div>
+            )}
         </section>
     );
 }
+
 

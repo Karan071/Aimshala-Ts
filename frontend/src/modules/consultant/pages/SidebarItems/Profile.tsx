@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, ChangeEvent } from "react";
+import { Link, Route, Routes, useLocation } from "react-router-dom";
 import {
     Facebook,
     Linkedin,
@@ -9,10 +10,25 @@ import {
 
 import profileFallback from "@/assets/Profile-1.png";
 import coverFallback from "@/assets/cover.png";
+import About from "./ProfileTabs/About";
+import Specialties from "./ProfileTabs/Specialities";
+import CareerFeed from "./ProfileTabs/CareerFeed";
+import Review from "./ProfileTabs/Review";
+import ProfileResource from "./ProfileTabs/ProfileResource";
 
 export default function Profile() {
+    const tabs = [
+        { label: "About", id: "about", path: "/consultant/profile/about" },
+        { label: "Specialties", id: "specialties", path: "/consultant/profile/specialties" },
+        { label: "Resources", id: "resources", path: "/consultant/profile/resources" },
+        { label: "CareerFeed", id: "career-feeds", path: "/consultant/profile/career-feeds" },
+        { label: "Review", id: "reviews", path: "/consultant/profile/reviews" },
+    ];
+
     const [coverSrc, setCoverSrc] = useState<string>(coverFallback);
     const [profileSrc, setProfileSrc] = useState<string>(profileFallback);
+    const location = useLocation();
+    const [activeTab, setActiveTab] = useState("about"); 
 
     const coverInputRef = useRef<HTMLInputElement | null>(null);
     const profileInputRef = useRef<HTMLInputElement | null>(null);
@@ -25,25 +41,23 @@ export default function Profile() {
     }, [coverSrc, profileSrc]);
 
     const handleChange =
-        (setter: (url: string) => void) =>
-            (e: ChangeEvent<HTMLInputElement>) => {
-                const file = e.target.files?.[0];
-                if (!file) return;
-                setter(URL.createObjectURL(file));
-            };
+        (setter: (url: string) => void) => (e: ChangeEvent<HTMLInputElement>) => {
+            const file = e.target.files?.[0];
+            if (!file) return;
+            setter(URL.createObjectURL(file));
+        };
 
     return (
         <section>
+            {/* Profile Header Section */}
             <div className="mt-20 border rounded-2xl font-poppins relative bg-white">
-                {/* ---------- Cover ---------- */}
+                {/* Cover */}
                 <div className="relative">
                     <img
                         src={coverSrc}
                         alt="cover"
                         className="h-[200px] w-full object-cover rounded-t-xl"
                     />
-
-                    {/* cover‑upload button */}
                     <button
                         onClick={() => coverInputRef.current?.click()}
                         className="absolute top-3 right-3 bg-white p-2 rounded-full shadow-md hover:bg-gray-100"
@@ -60,7 +74,7 @@ export default function Profile() {
                     />
                 </div>
 
-                {/* ---------- Profile ---------- */}
+                {/* Profile Image */}
                 <div className="absolute top-[140px] left-5">
                     <div className="relative">
                         <img
@@ -68,8 +82,6 @@ export default function Profile() {
                             alt="profile"
                             className="w-[170px] h-[170px] rounded-full object-cover border-4 border-white shadow-lg"
                         />
-
-                        {/* profile‑upload button */}
                         <button
                             onClick={() => profileInputRef.current?.click()}
                             className="absolute bottom-2 right-2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100"
@@ -84,16 +96,10 @@ export default function Profile() {
                             className="hidden"
                             onChange={handleChange(setProfileSrc)}
                         />
-                        <div className="absolute top-2 lg:right-350">
-                            <button className="inline-flex justify-center items-center gap-3 p-4 w-[190px] bg-white focus:bg-[var(--color-bg-purple] rounded-[70px] shadow-2xl h-[70px] text-[20px]"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-12 text-[#93268F]">
-                                <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm14.024-.983a1.125 1.125 0 0 1 0 1.966l-5.603 3.113A1.125 1.125 0 0 1 9 15.113V8.887c0-.857.921-1.4 1.671-.983l5.603 3.113Z" clipRule="evenodd" />
-                            </svg>
-                                Play Intro</button>
-                        </div>
                     </div>
                 </div>
 
-                {/* ---------- Social icons ---------- */}
+                {/* Social Links */}
                 <div className="flex gap-2 absolute right-0 top-[160px] m-3">
                     {[Linkedin, Facebook, Forward].map((Icon, i) => (
                         <div
@@ -105,7 +111,7 @@ export default function Profile() {
                     ))}
                 </div>
 
-                {/* ---------- Name / rating / verified ---------- */}
+                {/* Name, Rating, Verified */}
                 <div className="mt-30 ml-5 flex flex-wrap items-center gap-3">
                     <span className="text-[24px] font-semibold">John Doe</span>
 
@@ -143,27 +149,27 @@ export default function Profile() {
                     <Pencil className="text-[#93268F] cursor-pointer" />
                 </div>
 
-                {/* ---------- Headline ---------- */}
+                {/* Short Headline */}
                 <p className="m-4 text-[#787878] text-[15px]">
-                    Flipkart | Bain &amp; Co. | Gold Medalist, IIT Madras | XLRI
-                    Jamshedpur ‑ BM '24 | Accenture, Wipro (PPI)
+                    Flipkart | Bain & Co. | Gold Medalist, IIT Madras | XLRI
+                    Jamshedpur ‑ BM '24 | Accenture, Wipro (PPI)
                 </p>
 
-                {/* ---------- Location ---------- */}
+                {/* Location */}
                 <div className="m-4 inline-flex items-center gap-4 text-[#787878] text-[15px]">
                     <span>Ambala, Haryana, India</span>
                     <button className="text-[#93268F] underline">Contact Info</button>
                 </div>
 
-                {/* ---------- Skills ---------- */}
+                {/* Skills */}
                 <h3 className="m-4 font-medium">Skills</h3>
-                <p className="mx-4 mb-6 text-[#787878] text-[15px]">
+                <p className="mx-4 mb-4 text-[#787878] text-[15px]">
                     Stream Selection &nbsp;|&nbsp; Career Path Guidance &nbsp;|&nbsp; College
                     Selection &nbsp;|&nbsp; Exam Preparation &nbsp;|&nbsp; Study Skills
                     &nbsp;|&nbsp; Interview Prep &nbsp;|&nbsp; International Studies
                 </p>
 
-                {/* ---------- About ---------- */}
+                {/* About */}
                 <p className="m-4 text-[#787878] text-[15px] leading-relaxed">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
                     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
@@ -173,18 +179,29 @@ export default function Profile() {
                 </p>
             </div>
 
-            {/* ===================== Nav Pills ===================== */}
-            <div className="border rounded-2xl p-2 m-2 bg-white">
-                <nav className="flex flex-wrap gap-6 ml-2 text-[#787878] text-[18px]">
-                    {["About", "Specialties", "Resources", "Career Feeds", "Reviews"].map(
-                        (label) => (
-                            <span key={label} className="cursor-pointer hover:text-[#93268F]">
-                                {label}
-                            </span>
-                        )
-                    )}
+            {/* Tabs Navigation */}
+            <div className="rounded-2xl p-2 bg-white/80 mt-4">
+                <nav className="flex flex-wrap gap-6 ml-2 text-[#787878] text-[20px]">
+                    {tabs.map((tab) => (
+                        <Link
+                            key={tab.id}
+                            to={tab.path}
+                            className={`cursor-pointer bg-white hover:text-[#93268F] font-semibold ${location.pathname === tab.path ? "text-[#93268F]" : ""
+                                }`}
+                        >
+                            {tab.label}
+                        </Link>
+                    ))}
                 </nav>
             </div>
+            
+            <Routes>
+                <Route path="/about" element={<About />} />
+                <Route path="/specialties" element={<Specialties />} />
+                <Route path="/resources" element={<ProfileResource/>} />
+                <Route path="/career-feeds" element={<CareerFeed />} />
+                <Route path="/reviews" element={<Review />} />
+            </Routes>
         </section>
     );
 }

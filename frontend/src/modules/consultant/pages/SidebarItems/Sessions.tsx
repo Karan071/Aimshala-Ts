@@ -17,7 +17,7 @@ const summaries = [
 ];
 
 export default function Sessions() {
-    return <section className="border mt-20 rounded-2xl font-poppins p-4 m-2">
+    return <section className="border mt-20 rounded-2xl font-poppins p-4 m-2 bg-white">
         <div>
             <p className="font-bold text-[28px]">Sessions</p>
             <p className="text-[20px] text-[#787878]">Manage bookings</p>
